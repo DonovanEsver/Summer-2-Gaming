@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class TABSController : MonoBehaviour
 {
@@ -21,10 +22,14 @@ public class TABSController : MonoBehaviour
     [SerializeField, Tooltip("The layers the mouse can place units on")]
     private LayerMask _interactableLayers;
 
+    public int startingMoney; // the amount of money the player has to spend each level
+
+    public TMP_Text moneyText;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        moneyText.text = startingMoney.ToString();
     }
 
     // Update is called once per frame
@@ -60,7 +65,21 @@ public class TABSController : MonoBehaviour
 
     public void SelectUnit(int index)
     {
-        _pendingUnit = Instantiate(unitArray[index], _pos, transform.rotation);
+        // if the player can afford the unit they are attempting to buy...
+        if(startingMoney >= unitArray[index].GetComponent<Unit>().cost)
+        {
+            // spawn unit for the player to place
+            _pendingUnit = Instantiate(unitArray[index], _pos, transform.rotation);
+
+
+            // subtract unit cost from players money
+            startingMoney -= unitArray[index].GetComponent<Unit>().cost;
+
+
+            // Update money text
+            moneyText.text = startingMoney.ToString();
+
+        } else Debug.LogErrorFormat("Not enough money. ");
     }
 
     public void PlaceUnit()

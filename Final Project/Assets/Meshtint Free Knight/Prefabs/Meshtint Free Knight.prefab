@@ -176,6 +176,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4079118292684216}
   - component: {fileID: 95382778294392932}
+  - component: {fileID: 8586965054136875501}
   m_Layer: 0
   m_Name: Meshtint Free Knight
   m_TagString: Untagged
@@ -223,6 +224,21 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &8586965054136875501
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1022148595836406}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12963273d463d40b59efaa97c29cf700, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 1022148595836406}
+  cost: 150
+  unitClass: 4
 --- !u!1 &1087546517206048
 GameObject:
   m_ObjectHideFlags: 0
