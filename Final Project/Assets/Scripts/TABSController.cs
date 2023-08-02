@@ -3,10 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
+public enum GameState
+{
+    RecruitMode,
+    DeleteMode,
+    BattleMode,
+}
+
 public class TABSController : MonoBehaviour
 {
     [SerializeField]
     private Camera _camera;
+
+    // list of all units currently in the player's army on the battlefield
+    public List<GameObject> spawnedUnits = new List<GameObject>();
 
     [Tooltip("A list of all unit gameobjects the player is able to buy")]
     public GameObject[] unitArray;
@@ -22,33 +32,64 @@ public class TABSController : MonoBehaviour
     [SerializeField, Tooltip("The layers the mouse can place units on")]
     private LayerMask _interactableLayers;
 
+    [SerializeField, Tooltip("The layer our friendly units sit on")]
+    private LayerMask _friendlyUnitLayers;
+
     public int startingMoney; // the amount of money the player has to spend each level
 
     public TMP_Text moneyText;
 
     // Start is called before the first frame update
+
+    public static GameState gameState = GameState.RecruitMode;
     void Start()
     {
+        gameState = GameState.RecruitMode;
         moneyText.text = startingMoney.ToString();
     }
 
     // Update is called once per frame
     void Update()
     {
-        // if the pending unit is not empty/ if we have a unit wating to be placed in game...
-        if(_pendingUnit != null)
+        if (gameState == GameState.RecruitMode)
         {
-            // set the position of the unit to the position of the mous
-            _pendingUnit.transform.position = _pos;
-
-            // if the player left clicks
-            if(Input.GetMouseButtonDown(0))
+             // if the pending unit is not empty/ if we have a unit wating to be placed in game...
+            if(_pendingUnit != null)
             {
-                // place our units in the world
-                PlaceUnit();
+                // set the position of the unit to the position of the mous
+                _pendingUnit.transform.position = _pos;
+
+                // if the player left clicks
+                if(Input.GetMouseButtonDown(0))
+                {
+                    // place our units in the world
+                    PlaceUnit();
+                }
+            }
+        }
+
+        if (gameState == GameState.DeleteMode)
+        {
+            // if the player left clicks
+            if (Input.GetMouseButtonDown(0))
+            {
+                // shoot out a ray to check if we hit something
+                Ray deleteRay = _camera.ScreenPointToRay(Input.mousePosition);
+
+                if (Physics.Raycast(deleteRay, out _hit, Mathf.Infinity, _friendlyUnitLayers))
+                {
+                    Debug.Log($"We Hit " + _hit.collider.name);
+
+                    // store the unit gameObject
+                    GameObject unitToDelete = _hit.collider.gameObject;
+
+                    DeleteUnit(unitToDelete);
+                } else RecruitMode();
             }
         }
     }
+
+        //Then delete that unit
 
     void FixedUpdate()
     {
@@ -84,9 +125,47 @@ public class TABSController : MonoBehaviour
 
     public void PlaceUnit()
     {
+        spawnedUnits.Add(_pendingUnit);
         _pendingUnit = null;
     }
 
+    public void DeleteUnit(GameObject unitToDelete)
+    {
+        // refund the player $ for deleting unit
+        startingMoney += unitToDelete.GetComponent<Unit>().cost;
+
+        // update money text
+        moneyText.text = startingMoney.ToString();
+
+        // delete the unit
+        Destroy(unitToDelete);
+
+        RecruitMode();
+    }
+
+    public void ClearUnits()
+    {
+        // loop through all friendly units
+        foreach (GameObject unit in spawnedUnits)
+        {
+            DeleteUnit(unit);
+        }
+    }
+
+    public void DeleteMode()
+    {
+        gameState = GameState.DeleteMode;
+    }
+
+    public void RecruitMode()
+    {
+        gameState = GameState.RecruitMode;
+    }
+
+    public void BattleMode()
+    {
+        gameState = GameState.BattleMode;
+    }
 }
 
 

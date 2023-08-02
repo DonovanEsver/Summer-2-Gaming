@@ -3,20 +3,18 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags:
-  - Shadow
-  - Collide
+  tags: []
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Ground
   - Water
   - UI
+  - Friendly Units
   - 
   - 
-  - TempCast
-  - Walkable
+  - 
   - 
   - 
   - 
