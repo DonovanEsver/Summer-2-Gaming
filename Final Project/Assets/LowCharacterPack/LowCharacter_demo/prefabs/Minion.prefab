@@ -44,6 +44,7 @@ GameObject:
   - component: {fileID: 6640601484063307330}
   - component: {fileID: 6429608217540222072}
   - component: {fileID: 6074953073191110951}
+  - component: {fileID: 2033010067355770187}
   m_Layer: 6
   m_Name: Minion
   m_TagString: Untagged
@@ -116,6 +117,20 @@ CapsuleCollider:
   m_Height: 4.272591
   m_Direction: 1
   m_Center: {x: 0, y: 1.6883028, z: 0}
+--- !u!114 &2033010067355770187
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 109172321315190402}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf1c89fd9ce3f4638a8e733f062c210f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  faction: 0
+  enemyUnits: []
 --- !u!1 &278752737343883120
 GameObject:
   m_ObjectHideFlags: 0

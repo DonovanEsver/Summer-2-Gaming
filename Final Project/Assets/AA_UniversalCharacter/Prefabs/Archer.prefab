@@ -7614,6 +7614,7 @@ GameObject:
   - component: {fileID: 95664687578323722}
   - component: {fileID: 6349093430663449613}
   - component: {fileID: 5476386010535076739}
+  - component: {fileID: -1506287514605082152}
   m_Layer: 6
   m_Name: Archer
   m_TagString: Untagged
@@ -7687,6 +7688,20 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2.2471483, y: 2.3631227, z: 1}
   m_Center: {x: 0.070747666, y: 0.8956561, z: 0}
+--- !u!114 &-1506287514605082152
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1965107420363712}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf1c89fd9ce3f4638a8e733f062c210f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  faction: 0
+  enemyUnits: []
 --- !u!1 &1968470488432234
 GameObject:
   m_ObjectHideFlags: 0

@@ -26,11 +26,28 @@ public class TABSUnitAI : MonoBehaviour
         switch (faction)
         {
             case UnitFaction.Enemy:
+            UnitManager.Instance.enemyUnits.Add(gameObject);
             // create a list of all the players units
                 break;
             case UnitFaction.Friendly:
+            UnitManager.Instance.PlayerUnits.Add(gameObject);
             // create a list of all the enemies units
                 break;
+            default: break;
         } 
    }
+
+   private void OnDestroy()
+   {
+        switch (faction)
+        {
+            case UnitFaction.Enemy:
+                UnitManager.Instance.enemyUnits.Remove(gameObject);
+                break;
+            case UnitFaction.Friendly:
+                UnitManager.Instance.PlayerUnits.Remove(gameObject);
+                break;
+            default: break;
+        } 
+   } 
 }

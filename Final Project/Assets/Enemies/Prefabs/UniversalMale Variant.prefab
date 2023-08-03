@@ -99,5 +99,28 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 251134e3f8acc42adbbd7fecc5161b66, type: 2}
+    - target: {fileID: 3883144701645282674, guid: 0c76e34a76c36394d97845b0df033905, type: 3}
+      propertyPath: faction
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0c76e34a76c36394d97845b0df033905, type: 3}
+--- !u!1 &6793082423359955864 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1482964356427942, guid: 0c76e34a76c36394d97845b0df033905, type: 3}
+  m_PrefabInstance: {fileID: 6791609410767295294}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &5679148583662753266
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6793082423359955864}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf1c89fd9ce3f4638a8e733f062c210f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  faction: 1
+  enemyUnits: []
