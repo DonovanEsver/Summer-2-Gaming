@@ -137,6 +137,9 @@ public class TABSController : MonoBehaviour
         // update money text
         moneyText.text = startingMoney.ToString();
 
+        // Remove unit from spawn list
+        spawnedUnits.Remove(unitToDelete);
+
         // delete the unit
         Destroy(unitToDelete);
 
@@ -145,11 +148,16 @@ public class TABSController : MonoBehaviour
 
     public void ClearUnits()
     {
+        // Create a temp copy of unit list
+        List<GameObject> unitsToRemove = new List<GameObject>(spawnedUnits);
+
         // loop through all friendly units
-        foreach (GameObject unit in spawnedUnits)
+        foreach (GameObject unit in unitsToRemove)
         {
             DeleteUnit(unit);
         }
+
+        spawnedUnits.Clear();
     }
 
     public void DeleteMode()

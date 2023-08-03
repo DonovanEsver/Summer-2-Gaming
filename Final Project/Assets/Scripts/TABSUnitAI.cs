@@ -23,23 +23,14 @@ public class TABSUnitAI : MonoBehaviour
         _agent = GetComponent<NavMeshAgent>();
 
         // check which faction this enemy belongs too
-        Switch (faction)
+        switch (faction)
         {
             case UnitFaction.Enemy:
             // create a list of all the players units
                 break;
-            case UnitFaction.Friendly
+            case UnitFaction.Friendly:
             // create a list of all the enemies units
                 break;
-        }
+        } 
    }
-    
-        
-    
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
