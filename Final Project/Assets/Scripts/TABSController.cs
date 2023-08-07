@@ -39,13 +39,23 @@ public class TABSController : MonoBehaviour
 
     public TMP_Text moneyText;
 
+    [SerializeField] private AudioSource RecruitingMusic;
+    [SerializeField] private AudioSource BattleMusic;
+
     // Start is called before the first frame update
 
     public static GameState gameState = GameState.RecruitMode;
+
+    public GameObject battlefieldborder;
+
+    public GameObject recruitUI;
     void Start()
     {
         gameState = GameState.RecruitMode;
         moneyText.text = startingMoney.ToString();
+
+        RecruitingMusic.Play();
+        BattleMusic.Stop();
     }
 
     // Update is called once per frame
@@ -107,14 +117,14 @@ public class TABSController : MonoBehaviour
     public void SelectUnit(int index)
     {
         // if the player can afford the unit they are attempting to buy...
-        if(startingMoney >= unitArray[index].GetComponent<Unit>().cost)
+        if(startingMoney >= unitArray[index].GetComponent<Unit>().GetUnitCost())
         {
             // spawn unit for the player to place
             _pendingUnit = Instantiate(unitArray[index], _pos, transform.rotation);
 
 
             // subtract unit cost from players money
-            startingMoney -= unitArray[index].GetComponent<Unit>().cost;
+            startingMoney -= unitArray[index].GetComponent<Unit>().GetUnitCost();
 
 
             // Update money text
@@ -132,7 +142,7 @@ public class TABSController : MonoBehaviour
     public void DeleteUnit(GameObject unitToDelete)
     {
         // refund the player $ for deleting unit
-        startingMoney += unitToDelete.GetComponent<Unit>().cost;
+        startingMoney += unitToDelete.GetComponent<Unit>().GetUnitCost();
 
         // update money text
         moneyText.text = startingMoney.ToString();
@@ -173,6 +183,11 @@ public class TABSController : MonoBehaviour
     public void BattleMode()
     {
         gameState = GameState.BattleMode;
+        battlefieldborder.SetActive(false);
+        recruitUI.SetActive(false);
+
+        RecruitingMusic.Stop();
+        BattleMusic.Play();
     }
 }
 
